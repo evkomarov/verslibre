@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects</title>
+</head>
+
+<body>
+    <h1>Угадай загадку</h1>
+    <p id="riddle"></p>
+    <p><small>Дается 3 попытки.</small></p>
+    <div>
+        <input placeholder="ответ" autofocus>
+        <button onclick="check()">Проверить</button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+<script>
+var riddle = {
+    question: 'Висит груша нельзя скушать',
+    correctAnswer: 'лампочка',
+    hints: ['это съедобное', 'это фрукт'],
+    tries: 3,
+    checkAnswer(userAnswer) {
+    
+        if (this.tries < 1) {
+         		console.log('No more tries! Correct answer is', this.correctAnswer);
+            return alert('No more tries!'  + ' ' + 'Correct answer is' + ' ' + this.correctAnswer);
+
+        }
+        if (this.tries !== 0 && userAnswer.toString().toLowerCase().includes(this.correctAnswer)) {
+						this.tries = 0;
+            console.log('You win!');
+            return alert('You win!');
+
+        } else {
+            console.log('You wrong!');
+						alert('You wrong!');
+            this.tries--;
+        } 
+              if (this.tries < 3) {
+                console.log('Tries left', this.tries);
+                alert('Tries left' + ' ' + this.tries);
+                
+
+                }
+                const hint = this.hints[this.tries === 2 ? 0 : 1];
+								if (this.tries) {
+                    alert('Hint: ' + hint);
+                    console.log('Hint: ', hint);
+                    }
+                
+
+
+        
+        
+        // TODO: написать логику проверки правильного ответа
+        // alert для пользователя, console.log()
+        
+    },
+}
+
+window.onload = function() {
+    document.getElementById('riddle').innerText = riddle.question;
+}
+
+function check() {
+    var input = document.getElementsByTagName('input')[0];
+
+    var guessedAnswer = input.value;
+
+    if (guessedAnswer) {
+        // TODO: вызвать функцию checkAnswer у объекта загадки, передав туда ответ
+        riddle.checkAnswer(guessedAnswer);
+    }
+}
+</script>
+</html>
